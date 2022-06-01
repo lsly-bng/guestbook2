@@ -34,19 +34,7 @@ public class GuestbookController extends HttpServlet {
 		String action = request.getParameter("action");
 		System.out.println(action);
 
-		if ("addList".equals(action)) {
-			// 데이터 가져오기
-			GuestbookDao gbDao = new GuestbookDao();
-			List<GuestbookVo> gbList = gbDao.getGbList();
-			System.out.println(gbList);
-
-			// request에 데이터 추가
-			request.setAttribute("gbList", gbList);
-
-			// 데이터+html --> jsp 시킨다
-			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
-
-		} else if ("add".equals(action)) {
+		if ("add".equals(action)) {
 
 			// 파라미터에서 값 꺼내기 (name, password, content)
 			String name = request.getParameter("name");
@@ -62,7 +50,7 @@ public class GuestbookController extends HttpServlet {
 			gbDao.gbInsert(gbVo);
 
 			// redirect
-			WebUtil.redirect(request, response, "./gbc?action=addList");
+			WebUtil.redirect(request, response, "./gbc");
 
 		} else if ("deleteForm".equals(action)) {
 
@@ -84,10 +72,19 @@ public class GuestbookController extends HttpServlet {
 			gbDao.gbDelete(gbVo);
 
 			// redirect
-			WebUtil.redirect(request, response, "./gbc?action=addList");
+			WebUtil.redirect(request, response, "./gbc");
 
 		} else {
-			System.out.println("action 파라미터 없음");
+			// 데이터 가져오기
+			GuestbookDao gbDao = new GuestbookDao();
+			List<GuestbookVo> gbList = gbDao.getGbList();
+
+			// request에 데이터 추가
+			request.setAttribute("gbList", gbList);
+
+			// 데이터+html --> jsp 시킨다
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
+
 		}
 	}
 

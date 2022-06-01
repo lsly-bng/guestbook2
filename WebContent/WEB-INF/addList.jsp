@@ -6,7 +6,6 @@
 
 <%
 List<GuestbookVo> gbList = (List<GuestbookVo>)request.getAttribute("gbList");
-System.out.println(gbList);
 %>
 
 <!DOCTYPE html>

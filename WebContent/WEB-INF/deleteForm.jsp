@@ -24,7 +24,7 @@ System.out.println(no);
 				<td><input type="submit" value="삭제"></td>
 			</tr>
 		</table>
-		<a href="./gbc?action=addList">메인으로 돌아가기</a><br>
+		<a href="./gbc">메인으로 돌아가기</a><br>
 		<input type="hidden" name="no" value="<%=no%>">
 		<input type="hidden" name="action" value="delete">
 	</form>
